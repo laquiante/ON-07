@@ -1,0 +1,148 @@
+# Server01 Schnittstellen Datei
+
+- hosts: server01
+  name: Server01 Interfaces
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: IPv4
+      copy: 
+        src: /home/cumulus/ON-07/server01-if-00
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: activate changes on Server01
+      shell: /sbin/ifreload -a
+
+# Server02 Schnittstellen Datei
+
+- hosts: server02
+  name: Server02 Interfaces
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: IPv4
+      copy: 
+        src: /home/cumulus/ON-07/server02-if-00
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: activate changes on Server02
+      shell: /sbin/ifreload -a
+      
+
+# #################################################################
+# #################################################################
+# #################################################################
+
+# Leaf01 Schnittstellen Datei
+
+- hosts: leaf01
+  name: Leaf01 Interfaces
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: IF clean up
+      copy: 
+        src: /home/cumulus/ON-07/leaf01-if-00
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: activate changes on Leaf01
+      shell: /sbin/ifreload -a
+      
+# Leaf01 routing      
+      
+- hosts: leaf01
+  name: Routing cleanup
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: clean up
+      copy:
+        src: /home/cumulus/ON-07/leaf01-frr-00
+        dest: /etc/frr/frr.conf
+      notify:
+        - frr_reload
+        
+  handlers:
+    - name: frr_reload
+      service:
+        name=frr
+        state=reloaded
+      listen: "frr_reload"
+    
+# #################################################################    
+    
+# Leaf02 Schnittstellen Datei
+
+- hosts: leaf02
+  name: Leaf02 Interfaces
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: IF clean up
+      copy: 
+        src: /home/cumulus/ON-07/leaf02-if-00 
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: activate changes for Leaf02
+      shell: /sbin/ifreload -a    
+    
+# Leaf02 routing   
+      
+- hosts: leaf02
+  name: Routing clean up
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: clean up
+      copy: 
+        src: /home/cumulus/ON-07/leaf02-frr-00
+        dest: /etc/frr/frr.conf
+      notify:
+        - frr_reload
+ 
+  handlers:
+    - name: frr_reload
+      service:
+        name=frr
+        state=reloaded
+      listen: "frr_reload" 
+      
+    
+ 
+# #################################################################  
+ 
+# Spine01 IF Datei
+
+- hosts: spine01
+  name: Spine01 Interfaces
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: IF clean up 
+      copy: 
+        src: /home/cumulus/ON-07/spine01-if-00 
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: activate changes for Spine01
+      shell: /sbin/ifreload -a   
+ 
+# Spine01 routing
+      
+- hosts: spine01
+  name: Routing clean up
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: clean up
+      copy: 
+        src: /home/cumulus/ON-07/spine01-frr-00
+        dest: /etc/frr/frr.conf
+      notify:
+        - frr_reload
+      
+  handlers:
+    - name: frr_reload
+      service:
+        name=frr
+        state=reloaded
+      listen: "frr_reload"
