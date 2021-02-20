@@ -1,0 +1,8 @@
+frr version 7.0+cl4u3
+frr defaults datacenter
+hostname leaf01
+log syslog informational
+service integrated-vtysh-config
+!
+line vty
+!
