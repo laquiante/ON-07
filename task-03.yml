@@ -69,6 +69,7 @@
 
 # #################################################################    
  
+# Zustand von Task-01.yml
 # Spine01 IF Datei
 
 - hosts: spine01
@@ -78,7 +79,7 @@
   tasks:
     - name: l3-fabric 
       copy: 
-        src: /home/cumulus/ON-07/spine01-if-03 
+        src: /home/cumulus/ON-07/spine01-if-01 
         dest: /etc/network/interfaces
     # aktivieren
     - name: activate changes
