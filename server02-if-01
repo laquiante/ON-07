@@ -1,0 +1,11 @@
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+    post-up sysctl -w net.ipv6.conf.eth0.accept_ra=2
+    
+    # The data plane network interfaces
+auto eth1
+iface eth1 inet static
+  address 172.31.10.2/24
