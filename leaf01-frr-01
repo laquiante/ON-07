@@ -1,11 +1,11 @@
 frr version 7.0+cl4u3
 frr defaults datacenter
-hostname leaf03
+hostname leaf01
 log syslog informational
 service integrated-vtysh-config
 !
-router bgp 42000013
- bgp router-id 10.0.0.13
+router bgp 42000011
+ bgp router-id 10.0.0.11
  neighbor swp51 interface remote-as external
  !
  address-family ipv4 unicast
