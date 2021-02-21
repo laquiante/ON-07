@@ -5,4 +5,6 @@ Task-00.yml (Rücksetzen)
 
 Daemons.yml (FRR Daemons)
 
-Task-01.yml (Brücke, Server IP Adressen, FRR BGP Konfiguration)
+Task-01.yml (Brücke, Server IP Adressen)
+
+Task-02.yml (FRR BGP Konfiguration)
