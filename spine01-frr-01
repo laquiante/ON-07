@@ -1,0 +1,23 @@
+frr version 7.0+cl4u3
+frr defaults datacenter
+hostname spine01
+log syslog informational
+service integrated-vtysh-config
+!
+router bgp 42000000
+ bgp router-id 10.0.0.111
+ neighbor swp1 interface remote-as external
+ neighbor swp2 interface remote-as external
+ !
+ address-family ipv4 unicast
+  redistribute connected
+ exit-address-family
+ !
+ address-family l2vpn evpn
+  neighbor swp1 activate
+  neighbor swp2 activate
+  advertise-all-vni
+ exit-address-family
+!
+line vty
+!
