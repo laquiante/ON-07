@@ -47,27 +47,6 @@
     - name: Activate changes
       shell: /sbin/ifreload -a
       
-# Leaf01 routing      
-      
-- hosts: leaf01
-  name: Routing
-  become: yes
-  gather_facts: no
-  tasks:
-    - name: simple MP-BGP
-      copy:
-        src: /home/cumulus/ON-07/leaf01-frr-01
-        dest: /etc/frr/frr.conf
-      notify:
-        - frr_reload
-
-  handlers:
-    - name: frr_reload
-      service:
-        name=frr
-        state=reloaded
-      listen: "frr_reload"
-    
 # #################################################################    
     
 # Leaf02 IF Datei
@@ -85,27 +64,7 @@
     - name: activate changes
       shell: /sbin/ifreload -a    
     
-# Leaf02 routing   
-      
-- hosts: leaf02
-  name: Routing
-  become: yes
-  gather_facts: no
-  tasks:
-    - name: simple MP-BGP
-      copy: 
-        src: /home/cumulus/ON-07/leaf02-frr-01
-        dest: /etc/frr/frr.conf
-      notify:
-        - frr_reload
-        
-  handlers:
-    - name: frr_reload
-      service:
-        name=frr
-        state=reloaded
-      listen: "frr_reload"
-      
+
 # #################################################################    
  
 # Spine01 IF Datei
@@ -123,23 +82,3 @@
     - name: activate changes
       shell: /sbin/ifreload -a   
  
-# Spine01 routing
-      
-- hosts: spine01
-  name: Routing
-  become: yes
-  gather_facts: no
-  tasks:
-    - name: simple MP-BGP
-      copy: 
-        src: /home/cumulus/ON-07/spine01-frr-01
-        dest: /etc/frr/frr.conf
-      notify:
-        - frr_reload
-      
-  handlers:
-    - name: frr_reload
-      service:
-        name=frr
-        state=reloaded
-      listen: "frr_reload"
