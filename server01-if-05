@@ -1,0 +1,11 @@
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+    post-up sysctl -w net.ipv6.conf.eth0.accept_ra=2
+
+auto eth1
+iface eth1 inet static
+    address 172.31.10.1/24
+    post-up /sbin/route add -net 172.0.0.0 netmask 255.0.0.0 gw 172.31.10.111
