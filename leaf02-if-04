@@ -2,8 +2,8 @@ auto lo
 iface lo inet loopback
     address 10.0.0.12/32
 
-auto swp1
-iface swp1
+auto swp2
+iface swp2
     bridge-access 10
 
 auto swp51
@@ -11,7 +11,7 @@ iface swp51
 
 auto bridge
 iface bridge
-    bridge-ports swp1 vxlan10
+    bridge-ports swp2 vxlan10
     bridge-vids 10
     bridge-vlan-aware yes
 
