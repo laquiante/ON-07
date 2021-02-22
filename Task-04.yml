@@ -1,0 +1,35 @@
+# #################################################################
+# #################################################################
+# #################################################################
+
+# Leaf01 IF Datei
+
+- hosts: leaf01
+  name: Interfaces
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: VXLAN Interface 
+      copy: 
+        src: /home/cumulus/ON-07/leaf01-if-04 
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: Durchstarten der Schnittstelle
+      shell: /sbin/ifreload -a
+    
+# #################################################################    
+    
+# Leaf02 IF Datei
+
+- hosts: leaf02
+  name: Schnittstellen
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: VXLAN Interface 
+      copy: 
+        src: /home/cumulus/ON-07/leaf02-if-04 
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: activate changes
+      shell: /sbin/ifreload -a    
