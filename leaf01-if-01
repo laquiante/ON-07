@@ -9,15 +9,6 @@ iface swp1
 auto swp51
 iface swp51
 
-auto swp49
-iface swp49
-    alias peerlink
-
-auto swp50
-iface swp50
-    alias peerlink
-
-
 auto bridge
 iface bridge
     bridge-ports swp1 swp49 swp50
