@@ -1,0 +1,68 @@
+# Server01 IF Datei
+
+- hosts: server01
+  name: Interfaces for Server01
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: IPv4
+      copy: 
+        src: /home/cumulus/ON-07/server01-if-05
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: activate changes
+      shell: /sbin/ifreload -a
+
+
+# Server02 IF Datei
+
+- hosts: server02
+  name: Interfaces for Server02
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: IPv4
+      copy: 
+        src: /home/cumulus/ON-07/server02-if-05
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: activate changes
+      shell: /sbin/ifreload -a
+
+# #################################################################
+# #################################################################
+# #################################################################
+
+# Leaf01 IF Datei
+
+- hosts: leaf01
+  name: Interfaces for Leaf01
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Interfaces for Leaf01
+      copy: 
+        src: /home/cumulus/ON-07/leaf01-if-05 
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: activating changes
+      shell: /sbin/ifreload -a
+      
+# #################################################################    
+    
+# Leaf02 IF Datei
+
+- hosts: leaf02
+  name: Interfaces for Leaf02
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Interfaces for Leaf02
+      copy: 
+        src: /home/cumulus/ON-07/leaf02-if-05 
+        dest: /etc/network/interfaces
+    # aktivieren
+    - name: activate changes
+      shell: /sbin/ifreload -a    
+    
+# #################################################################  
