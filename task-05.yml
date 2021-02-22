@@ -48,6 +48,28 @@
     - name: activating changes
       shell: /sbin/ifreload -a
       
+# Leaf01 routing      
+      
+- hosts: leaf01
+  name: Routing
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: MP-BGP
+      copy:
+        src: /home/cumulus/ON-07/leaf01-frr-05
+        dest: /etc/frr/frr.conf
+      notify:
+        - frr_reload
+        
+  handlers:
+    - name: frr_reload
+      service:
+        name=frr
+        state=reloaded
+      listen: "frr_reload"
+          
+      
 # #################################################################    
     
 # Leaf02 IF Datei
@@ -64,5 +86,27 @@
     # aktivieren
     - name: activate changes
       shell: /sbin/ifreload -a    
-    
+
+# Leaf02 routing   
+      
+- hosts: leaf02
+  name: Routing
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: MP-BGP
+      copy: 
+        src: /home/cumulus/ON-07/leaf02-frr-05
+        dest: /etc/frr/frr.conf
+      notify:
+        - frr_reload
+ 
+  handlers:
+    - name: frr_reload
+      service:
+        name=frr
+        state=reloaded
+      listen: "frr_reload" 
+ 
+
 # #################################################################  
