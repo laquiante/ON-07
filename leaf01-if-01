@@ -1,6 +1,6 @@
 auto lo
 iface lo inet loopback
-    address 10.0.0.12/32
+    address 10.0.0.11/32
 
 auto swp1
 iface swp1
