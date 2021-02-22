@@ -11,7 +11,7 @@ iface swp51
 
 auto bridge
 iface bridge
-    bridge-ports swp2 swp49 swp50
+    bridge-ports swp2 
     bridge-vids 10
     bridge-vlan-aware yes
 
