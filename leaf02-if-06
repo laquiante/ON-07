@@ -1,0 +1,68 @@
+auto lo
+iface lo inet loopback
+    address 10.0.0.12/32
+    clagd-vxlan-anycast-ip 10.0.1.1
+    vxlan-local-tunnelip 10.0.0.12
+
+auto swp1
+iface swp1
+    
+auto hpcbond
+iface hpcbond
+    bridge-access 10
+    bond-slaves swp1
+    clag-id 1
+    bond-lacp-bypass-allow yes
+
+auto swp51
+iface swp51
+
+auto swp49
+iface swp49
+
+auto swp50
+iface swp50
+
+auto bridge
+iface bridge
+    bridge-ports peerlink hpcbond vxlan10
+    bridge-vids 10
+    bridge-vlan-aware yes
+
+auto peerlink
+iface peerlink
+    bond-slaves swp49 swp50 
+    
+auto peerlink.4094
+iface peerlink.4094
+    clagd-args --initDelay 20
+    clagd-backup-ip 10.0.0.11
+    clagd-peer-ip linklocal
+    clagd-priority 1000
+    clagd-sys-mac 44:38:39:BE:EF:AA
+
+auto mgmt
+iface mgmt
+    vrf-table auto
+    address 127.0.0.1/8
+
+auto eth0
+iface eth0 inet dhcp
+    vrf mgmt
+    post-up sysctl -w net.ipv6.conf.eth0.accept_ra=2
+
+auto vlan10
+iface vlan10
+    address 172.31.10.112/24
+    address-virtual 00:00:00:00:00:01 172.31.10.110/24
+    vlan-id 10
+    vlan-raw-device bridge
+
+auto vxlan10
+iface vxlan10
+    bridge-access 10
+    bridge-arp-nd-suppress on
+    bridge-learning off
+    mstpctl-bpduguard yes
+    mstpctl-portbpdufilter yes
+    vxlan-id 10
