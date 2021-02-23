@@ -8,7 +8,7 @@
   tasks:
     - name: simple MP-BGP
       copy:
-        src: /home/cumulus/ON-07/leaf01-frr-01
+        src: /home/cumulus/ON-07/leaf01-frr-02
         dest: /etc/frr/frr.conf
       notify:
         - frr_reload
@@ -31,7 +31,7 @@
   tasks:
     - name: simple MP-BGP
       copy: 
-        src: /home/cumulus/ON-07/leaf02-frr-01
+        src: /home/cumulus/ON-07/leaf02-frr-02
         dest: /etc/frr/frr.conf
       notify:
         - frr_reload
@@ -54,7 +54,7 @@
   tasks:
     - name: simple MP-BGP
       copy: 
-        src: /home/cumulus/ON-07/spine01-frr-01
+        src: /home/cumulus/ON-07/spine01-frr-02
         dest: /etc/frr/frr.conf
       notify:
         - frr_reload
