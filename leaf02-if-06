@@ -1,7 +1,6 @@
 auto lo
 iface lo inet loopback
     address 10.0.0.12/32
-    clagd-vxlan-anycast-ip 10.0.1.1
     vxlan-local-tunnelip 10.0.0.12
 
 auto swp1
