@@ -1,0 +1,66 @@
+# Leaf01 routing      
+      
+- hosts: leaf01
+  name: Routing
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: simple MP-BGP
+      copy:
+        src: /home/cumulus/ON-07/leaf01-frr-002
+        dest: /etc/frr/frr.conf
+      notify:
+        - frr_reload
+
+  handlers:
+    - name: frr_reload
+      service:
+        name=frr
+        state=reloaded
+      listen: "frr_reload"
+    
+# #################################################################        
+    
+# Leaf02 routing   
+      
+- hosts: leaf02
+  name: Routing
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: simple MP-BGP
+      copy: 
+        src: /home/cumulus/ON-07/leaf02-frr-02
+        dest: /etc/frr/frr.conf
+      notify:
+        - frr_reload
+        
+  handlers:
+    - name: frr_reload
+      service:
+        name=frr
+        state=reloaded
+      listen: "frr_reload"
+      
+# #################################################################    
+ 
+# Spine01 routing
+      
+- hosts: spine01
+  name: Routing
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: simple MP-BGP
+      copy: 
+        src: /home/cumulus/ON-07/spine01-frr-02
+        dest: /etc/frr/frr.conf
+      notify:
+        - frr_reload
+      
+  handlers:
+    - name: frr_reload
+      service:
+        name=frr
+        state=reloaded
+      listen: "frr_reload"
