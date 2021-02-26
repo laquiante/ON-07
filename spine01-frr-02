@@ -4,6 +4,9 @@ hostname spine01
 log syslog informational
 service integrated-vtysh-config
 !
+vrf LinuxAdmin
+  vni 10010
+!
 router bgp 42000000
  bgp router-id 10.0.0.111
  neighbor swp1 interface remote-as external
