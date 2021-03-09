@@ -1,13 +1,13 @@
 # ON-07
-new 02EVPN
+new Zero to EVPN / MLAG
 
-Task-00.yml (Rücksetzen)
+Task-00.yml (Clean up)
 
 Daemons.yml (FRR Daemons)
 
-Task-01.yml (Brücke, Server IP Adressen)
+Task-01.yml (Bridge, Server IP Addresses)
 
-Task-02.yml (FRR BGP Konfiguration)
+Task-02.yml (FRR BGP Configuration)
 
 Task-03.yml (SVI, VRR)
 
