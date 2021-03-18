@@ -26,14 +26,14 @@ ospfd=yes
 ospf6d=no
 ripd=no
 ripngd=no
-isisd=no
+isisd=yes
 fabricd=no
 pimd=no
 ldpd=no
 nhrpd=no
 eigrpd=no
 babeld=no
-sharpd=no
+sharpd=yes
 pbrd=no
 vrrpd=no
 
