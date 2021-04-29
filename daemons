@@ -21,12 +21,12 @@
 # The watchfrr daemon is always started. Per default in monitoring-only but
 # that can be changed.
 #
-bgpd=no
+bgpd=yes
 ospfd=no
 ospf6d=no
 ripd=no
 ripngd=no
-isisd=yes
+isisd=no
 fabricd=no
 pimd=no
 ldpd=no
